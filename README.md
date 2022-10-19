@@ -7,14 +7,14 @@ It would remain unrecognized token.
 
 ## TODO:
 - Supporting features:
-    - [] extends
-    - [] block
-    - [] variables
-        - [] member data
-        - [] serialize
-    - [] filters
-    - [] tags
-        - [] `for` statement
-        - [] `if` statement
-    - [] comments
+    - [ ] extends
+    - [ ] block
+    - [ ] variables
+        - [ ] member data
+        - [ ] serialize
+    - [ ] filters
+    - [ ] tags
+        - [ ] `for` statement
+        - [ ] `if` statement
+    - [ ] comments
 
