@@ -4,9 +4,8 @@
 #include <module.hpp>
 #include <string>
 
-namespace Django
-{
-    Module parse(const std::string &filepath);
+namespace Django {
+Module parse(const std::string& filepath);
 };
 
 #endif
