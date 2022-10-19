@@ -52,7 +52,7 @@ json detail::parse(const std::string& str) {
     json j = json::object();
 
     // Find variable
-    // j["variable"] = parser::find_variables(striped);
+    j["variable"] = parser::find_variables(stripped);
 
     return j;
 }
