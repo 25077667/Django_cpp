@@ -5,6 +5,15 @@ Using [Django](https://docs.djangoproject.com/en/4.1/ref/templates/language/) la
 
 It would remain unrecognized token.
 
+## How to build
+```shell=
+mkdir build
+conan install engine/conanfile.txt -if build --build=missing
+cd build
+cmake  -DCMAKE_BUILD_TYPE=Release ../engine -G Ninja
+ninja
+```
+
 ## TODO:
 - Supporting features:
     - [ ] extends
@@ -16,5 +25,5 @@ It would remain unrecognized token.
     - [ ] tags
         - [ ] `for` statement
         - [ ] `if` statement
-    - [ ] comments
+    - [x] comments
 
