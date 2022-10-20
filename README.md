@@ -18,9 +18,9 @@ ninja
 - Supporting features:
     - [ ] extends
     - [ ] block
-    - [ ] variables
-        - [ ] member data
-        - [ ] serialize
+    - [x] variables
+        - [x] member data
+        - [x] serialize
     - [ ] filters
     - [ ] tags
         - [ ] `for` statement

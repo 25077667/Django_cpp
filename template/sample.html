@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    {{ foo }} {{ bar }}
+    {{ foo }} {{ bar.goo }}
     <div id="sidebar">
         {% block sidebar %}
         <ul>
@@ -16,7 +16,7 @@
         {% endblock %}
     </div>
 
-    {# This is a comment. #}
+    {# This is a comment. #} {% for i in aaa %} {% endfor %}
 
     <div id="content">
         {% block content %}{% endblock %}
