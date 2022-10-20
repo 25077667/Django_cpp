@@ -16,7 +16,7 @@
         {% endblock %}
     </div>
 
-    {# This is a comment. #} {% for i in aaa %} {% endfor %}
+    {{ value|default:"nothing" }} {# This is a comment. #} {% for i in aaa %} {% endfor %}
 
     <div id="content">
         {% block content %}{% endblock %}

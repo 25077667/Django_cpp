@@ -5,6 +5,13 @@ Using [Django](https://docs.djangoproject.com/en/4.1/ref/templates/language/) la
 
 It would remain unrecognized token.
 
+## Pre-requirements
+```
+cmake
+clang++ or g++ (Not sure for MSVC)
+conan
+```
+
 ## How to build
 ```shell=
 mkdir build
