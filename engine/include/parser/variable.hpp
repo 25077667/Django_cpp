@@ -5,7 +5,7 @@
 #include <string>
 
 namespace parser {
-/* Suppose the key-value map is uniuqe */
+/* Suppose the key-value map is unique */
 nlohmann::json find_variables(const std::string& str);
 }  // namespace parser
 

@@ -23,7 +23,7 @@ ninja
 
 ## TODO:
 - Supporting features:
-    - [ ] extends
+    - [x] extends
     - [ ] block
     - [x] variables
         - [x] member data

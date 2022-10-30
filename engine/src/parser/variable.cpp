@@ -17,7 +17,11 @@ nlohmann::json parser::find_variables(const std::string& str) {
     json j;
 
     for (const auto& tok : detail::find_variable_impl(str)) {
-        j.emplace_back(detail::transform_nested_variable(tok));
+        const auto& to_be_inserted = detail::transform_nested_variable(tok);
+        // TODO: Improve performance here
+        // Don't insert duplicated keys
+        if (j.dump().find(to_be_inserted.dump()) == std::string::npos)  // Not already exist
+            j.emplace_back(std::move(to_be_inserted));
     }
 
     return j;

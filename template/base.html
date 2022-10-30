@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Smaple HTML</title>
+</head>
+
+<body>
+    {{ foo }} {{ bar.goo }}
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+    {{ foo }} {{ value|default:"nothing" }} {# This is a comment. #} {% for i in aaa %} {% endfor %}
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>
