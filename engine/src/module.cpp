@@ -19,12 +19,11 @@ struct Django::Module::Impl {
     Impl(const std::string& filepath);
 
     const std::string filepath;
-    const std::string context;
     json contents;
 };
 
 Django::Module::Impl::Impl(const std::string& filepath_)
-    : filepath{filepath_}, context{parser::extend_templates(filepath_)}, contents{detail::parse(context)} {}
+    : filepath{filepath_}, contents(detail::parse(parser::extend_templates(filepath_))) {}
 
 Django::Module::Module() : pImpl{std::make_unique<Django::Module::Impl>()} {}
 Django::Module::~Module() {}
@@ -35,16 +34,36 @@ std::string Django::Module::to_string() const noexcept {
     return pImpl->contents.dump();
 }
 
+void Django::Module::set(const std::string& key, const std::string& value) {
+    auto& var_ = pImpl->contents["variable"];
+    if (!var_.contains(key))
+        throw std::logic_error(std::string("Setting non-existing ") + key + " for " + value);
+    else
+        var_[key] = value;
+}
+
+std::optional<std::string> Django::Module::get(const std::string& key) const noexcept {
+    const auto& var_ = pImpl->contents["variable"];
+    if (!var_.contains(key))
+        return std::nullopt;
+    else {
+        std::string ret;
+        var_[key].get_to<std::string>(ret);
+        return ret;
+    }
+}
+
 json detail::parse(const std::string& str) {
     // Strip all comments
     const auto& stripped = helper::strip_comments(str);
 
     // Freeze the origin placeholder there
     // We register another information about the placeholder
-    json j = json::object();
+    json j;
 
     // Find variable
     j["variable"] = parser::find_variables(stripped);
+    j["context"] = stripped;
 
     return j;
 }

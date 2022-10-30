@@ -21,7 +21,8 @@ nlohmann::json parser::find_variables(const std::string& str) {
         // TODO: Improve performance here
         // Don't insert duplicated keys
         if (j.dump().find(to_be_inserted.dump()) == std::string::npos)  // Not already exist
-            j.emplace_back(std::move(to_be_inserted));
+            for (const auto& [key, value] : to_be_inserted.items())
+                j[key] = value;
     }
 
     return j;
