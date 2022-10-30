@@ -19,13 +19,12 @@ struct Django::Module::Impl {
     Impl(const std::string& filepath);
 
     const std::string filepath;
+    const std::string context;
     json contents;
 };
 
 Django::Module::Impl::Impl(const std::string& filepath_)
-    : filepath{filepath_}, contents{[&filepath_]() -> json {
-          return detail::parse(parser::extend_templates(filepath_));
-      }()} {}
+    : filepath{filepath_}, context{parser::extend_templates(filepath_)}, contents{detail::parse(context)} {}
 
 Django::Module::Module() : pImpl{std::make_unique<Django::Module::Impl>()} {}
 Django::Module::~Module() {}
