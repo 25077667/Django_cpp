@@ -1,6 +1,7 @@
 #include <module.hpp>
 #include <nlohmann/json.hpp>
 #include <parser/parser.hpp>
+#include <render/render.hpp>
 #include <stdexcept>
 #include <string_view>
 
@@ -34,23 +35,30 @@ std::string Django::Module::to_string() const noexcept {
     return pImpl->contents.dump();
 }
 
-void Django::Module::set(const std::string& key, const std::string& value) {
+void Django::Module::set(const std::string& key, const nlohmann::json& value) {
     auto& var_ = pImpl->contents["variable"];
     if (!var_.contains(key))
-        throw std::logic_error(std::string("Setting non-existing ") + key + " for " + value);
-    else
-        var_[key] = value;
+        throw std::logic_error(std::string("Setting non-existing ") + key + " for " + value.dump());
+    var_[key] = value;
 }
 
-std::optional<std::string> Django::Module::get(const std::string& key) const noexcept {
+void Django::Module::set(const std::string& key, nlohmann::json&& value) {
+    auto& var_ = pImpl->contents["variable"];
+    if (!var_.contains(key))
+        throw std::logic_error(std::string("Setting non-existing ") + key + " for " + value.dump());
+    var_[key] = std::move(value);
+}
+
+std::optional<nlohmann::json> Django::Module::get(const std::string& key) const noexcept {
     const auto& var_ = pImpl->contents["variable"];
     if (!var_.contains(key))
         return std::nullopt;
-    else {
-        std::string ret;
-        var_[key].get_to<std::string>(ret);
-        return ret;
-    }
+
+    return var_[key];
+}
+
+const std::string Django::Module::render() const {
+    return render::render(pImpl->contents);
 }
 
 json detail::parse(const std::string& str) {
@@ -71,7 +79,7 @@ json detail::parse(const std::string& str) {
 std::string detail::helper::strip_comments(const std::string& str) {
     // comment format: {# .* #}
     // https://docs.djangoproject.com/en/4.1/ref/templates/language/#comments
-    // It is open-close style qouting
+    // It is open-close style quoting
 
     static const std::string_view comment_beg{"{#"};
     static const std::string_view comment_end{"#}"};
@@ -84,7 +92,7 @@ std::string detail::helper::strip_comments(const std::string& str) {
         size_t stop = str.size();
 
         size_t opened = str.find(comment_beg, cur);
-        if (opened != std::string::npos) {  // Opned
+        if (opened != std::string::npos) {  // Opened
             stop = str.find(comment_end, cur);
 
             if (stop == std::string::npos) [[unlikely]]

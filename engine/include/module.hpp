@@ -1,6 +1,8 @@
 #ifndef DJANGO_ENGINE_MODULE_HPP_
 #define DJANGO_ENGINE_MODULE_HPP_
 
+#include <nlohmann/json.hpp>
+
 #include <memory>
 #include <optional>
 #include <string>
@@ -20,8 +22,11 @@ class Module {
 
     std::string to_string() const noexcept;
     // Not support any type yet
-    void set(const std::string& key, const std::string& value);
-    std::optional<std::string> get(const std::string& key) const noexcept;
+    void set(const std::string& key, const nlohmann::json& value);
+    void set(const std::string& key, nlohmann::json&& value);
+    std::optional<nlohmann::json> get(const std::string& key) const noexcept;
+
+    const std::string render() const;
 
    private:
     struct Impl;

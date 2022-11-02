@@ -9,5 +9,6 @@ add_library(Module STATIC module.cpp)
 target_include_directories(Module PUBLIC ${HEADER_DIRS})
 
 add_subdirectory(parser)
+add_subdirectory(render)
 
-target_link_libraries(Django PUBLIC Module nlohmann_json::nlohmann_json parser)
+target_link_libraries(Django PUBLIC Module nlohmann_json::nlohmann_json parser render)
