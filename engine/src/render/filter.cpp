@@ -75,9 +75,14 @@ render::filter_callback render::parse_filter(const std::string& filter_raw_str) 
 }
 
 auto detail::split_ctrl_tok_para(const std::string& filter_raw_str) -> std::tuple<std::string, std::string> {
+    // Pattern: {{ [^ ]+ }}
     const auto spilt_pos = filter_raw_str.find(para_delia);
+
     if (spilt_pos == filter_raw_str.npos)  // Only control token
         return std::make_tuple(filter_raw_str, "");
-    else
-        return std::make_tuple(filter_raw_str.substr(0, spilt_pos), filter_raw_str.substr(spilt_pos + 1));
+    else {
+        const auto end_of_capture_pos = filter_raw_str.find_first_of(' ', spilt_pos);
+        return std::make_tuple(filter_raw_str.substr(0, spilt_pos),
+                               filter_raw_str.substr(spilt_pos + 1, end_of_capture_pos - spilt_pos - 1));
+    }
 }

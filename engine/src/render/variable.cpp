@@ -40,6 +40,9 @@ std::string render::variable(const std::string& ctx, const json& j) {
         flags |= boost::match_not_bob;
     }
 
+    // Append tailing ctx
+    result.append(start, ctx.end());
+
     return result;
 }
 

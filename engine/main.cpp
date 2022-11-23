@@ -18,5 +18,8 @@ int main() {
     if (foo_.has_value())
         std::cout << foo_.value() << std::endl;
 
+    const auto& res = nothing.render();
+    std::cout << res << std::endl;
+
     return 0;
 }
