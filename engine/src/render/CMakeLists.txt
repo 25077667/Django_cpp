@@ -14,4 +14,7 @@ target_include_directories(render_filter PUBLIC ${HEADER_DIRS})
 add_library(render_custom_filter STATIC custom_filter.cpp ${HEADER_DIRS})
 target_include_directories(render_custom_filter PUBLIC ${HEADER_DIRS})
 
-target_link_libraries(render PUBLIC Boost::regex render_variable render_filter render_custom_filter)
+add_library(render_tags STATIC tags.cpp ${HEADER_DIRS})
+target_include_directories(render_tags PUBLIC ${HEADER_DIRS})
+
+target_link_libraries(render PUBLIC Boost::regex render_variable render_filter render_custom_filter render_tags)
