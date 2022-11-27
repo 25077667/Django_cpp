@@ -9,7 +9,6 @@ std::string get_origin_ctx(const json& j);
 
 std::string render::render(const json& j) {
     const auto& origin_ctx = detail::get_origin_ctx(j["context"]);
-    // TODO: Rendering {% block %}
     // TODO: Rendering tags (for loop and if condition)
     // TODO: Rendering variables w/wo filters
     const auto& ret = render::variable(origin_ctx, j["variable"]);

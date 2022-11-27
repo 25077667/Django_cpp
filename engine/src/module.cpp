@@ -1,5 +1,6 @@
 #include <module.hpp>
 #include <nlohmann/json.hpp>
+#include <parser/block.hpp>
 #include <parser/parser.hpp>
 #include <render/render.hpp>
 #include <stdexcept>
@@ -64,14 +65,15 @@ const std::string Django::Module::render() const {
 json detail::parse(const std::string& str) {
     // Strip all comments
     const auto& stripped = helper::strip_comments(str);
+    const auto& clear_blocks = parser::proc_block(stripped);
 
     // Freeze the origin placeholder there
     // We register another information about the placeholder
     json j;
 
     // Find variable
-    j["variable"] = parser::find_variables(stripped);
-    j["context"] = stripped;
+    j["variable"] = parser::find_variables(clear_blocks);
+    j["context"] = clear_blocks;
 
     return j;
 }
