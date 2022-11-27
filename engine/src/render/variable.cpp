@@ -28,7 +28,7 @@ std::string render::variable(const std::string& ctx, const json& j) {
         result += std::string(start, what[0].first);
 
         // Split by operator| for a filter
-        const auto& [var_tok, filter] = detail::split_var_filter(what[0].str());
+        const auto& [var_tok, filter] = detail::split_var_filter(what[1].str());
         // TODO: Supporting multiple filters here
         const auto& process_fn = render::parse_filter(filter);
         result += process_fn(var_tok, j);

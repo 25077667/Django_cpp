@@ -20,6 +20,10 @@ std::string render::value_lookup(const std::string& var_tok, const json& j) {
             throw std::range_error("Could not find" + var_tok + " in " + j.dump());
     }
 
+    // NOTE: If you use a variable that doesn’t exist,
+    // the template system will insert the value of the
+    // string_if_invalid option, which is set to '' (the empty string) by default.
+
     std::string ret;
     // TODO: dynamic casting type
     j_copy.get_to<std::string>(ret);
@@ -27,16 +31,18 @@ std::string render::value_lookup(const std::string& var_tok, const json& j) {
     return ret;
 }
 
-std::string render::custom_filter::empty_callback([[maybe_unused]] const std::string& var_tok,
-                                                  [[maybe_unused]] const json& j) {
-    return "";
+// Lookup the json if it is contains the value of var_tok
+std::string render::custom_filter::empty_callback(const std::string& var_tok, const json& j) {
+    return value_lookup(var_tok, j);
 }
 
 std::string render::custom_filter::default_value_callback(const std::string& value, const std::string& var_tok,
                                                           const json& j) {
 
+    std::string ret;
     try {
-        return render::value_lookup(var_tok, j);
+        ret = render::value_lookup(var_tok, j);
+        return (ret.empty()) ? value : ret;  // Return default '' empty string if it is not found.
     } catch (...) {
         return value;
     }
