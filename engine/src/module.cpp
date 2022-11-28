@@ -1,6 +1,5 @@
 #include <module.hpp>
 #include <nlohmann/json.hpp>
-#include <parser/block.hpp>
 #include <parser/parser.hpp>
 #include <render/render.hpp>
 #include <stdexcept>

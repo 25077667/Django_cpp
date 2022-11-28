@@ -12,6 +12,15 @@ clang++ or g++ (Not sure for MSVC)
 conan
 ```
 
+### Suggested but not required
+```
+bison
+flex
+``` 
+
+It would prefer using MIT-based license, and we avoid GPL pollution.
+
+
 ## How to build
 ```shell=
 mkdir build

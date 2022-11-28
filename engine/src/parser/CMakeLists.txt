@@ -14,4 +14,6 @@ target_include_directories(extends PUBLIC ${HEADER_DIRS})
 add_library(block STATIC block.cpp)
 target_include_directories(block PUBLIC ${HEADER_DIRS})
 
-target_link_libraries(parser PUBLIC parser_variable extends block Boost::regex)
+add_subdirectory(block)
+
+target_link_libraries(parser PUBLIC parser_variable extends block Boost::regex block_parser)
