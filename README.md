@@ -21,6 +21,10 @@ cmake  -DCMAKE_BUILD_TYPE=Release ../engine -G Ninja
 ninja
 ```
 
+:::detail
+You should `brew install nlohmann-json` if you are using MacOS.
+:::
+
 ## TODO:
 - Supporting features:
     - [x] extends
