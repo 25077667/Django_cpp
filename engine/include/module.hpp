@@ -13,9 +13,7 @@ class Module {
    public:
     Module();
     ~Module();
-    Module(const Module&) = default;
     Module(Module&&) = default;
-    Module& operator=(const Module&) = default;
     Module& operator=(Module&&) = default;
 
     Module(const std::string& filepath);
