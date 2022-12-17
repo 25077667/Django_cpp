@@ -20,7 +20,7 @@ if (${FORCE_COLORED_OUTPUT})
 endif ()
 
 set(CMAKE_CXX_FLAGS_DEBUG_INIT "-O0 -ggdb -fsanitize=address")
-set(CMAKE_CXX_FLAGS_RELEASE_INIT "-Ofast -s -flto")
+set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -s -flto=auto -Bstatic")
 
 add_executable(engine main.cpp)
 add_subdirectory(src)
