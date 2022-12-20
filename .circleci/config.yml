@@ -21,11 +21,13 @@ jobs:
     parallelism: 3
   build:
     machine:
-      image: ubuntu:latest
+      image: ubuntu-2004:202010-01
+    resource_class: 2xlarge+
     steps:
       - run:
           name: "Building"
           command: docker build -t try-build .
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
