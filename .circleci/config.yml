@@ -18,9 +18,10 @@ jobs:
       - run:
           name: "Check static-analysis"
           command: ./.ci/static-analysis.sh
+    parallelism: 3
   build:
     machine:
-      image: debian:sid
+      image: ubuntu:latest
     steps:
       - run:
           name: "Building"
