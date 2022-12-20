@@ -11,7 +11,7 @@ jobs:
     steps:
       - run:
           name: "Prepare environment"
-          command: apt-get install -q -y build-essential cppcheck clang-format
+          command: apt-get update -y && apt-get install -q -y build-essential cppcheck clang-format
       - run:
           name: "Check format"
           command: ./.ci/check-format.sh
