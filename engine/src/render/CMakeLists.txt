@@ -1,4 +1,4 @@
-set(HEADER_DIRS "${CMAKE_SOURCE_DIR}/include")
+set(HEADER_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../../include")
 
 find_package(Boost 1.80.0 REQUIRED COMPONENTS regex)
 
