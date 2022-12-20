@@ -1,7 +1,8 @@
 FROM debian:sid as builder
 WORKDIR /src
-RUN apt-get update -y && \
-    apt-get upgrade -y && \
+
+RUN apt-get --allow-unauthenticated update -y && \
+    apt-get --allow-unauthenticated dist-upgrade  -y && \
     apt-get install -y build-essential cmake ninja-build mold python3 python3-pip nlohmann-json3-dev && \
     pip3 install conan
 
@@ -22,6 +23,6 @@ FROM debian:unstable-slim
 WORKDIR /app
 
 COPY --from=builder --chown=1000:1000 /src/build/bin/engine .
-COPY ../template/ /template/
+COPY ["template/", "../template/"]
 
 CMD ./engine

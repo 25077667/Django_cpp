@@ -17,7 +17,7 @@ std::string strip_comments(const std::string& s);
 
 struct Django::Module::Impl {
     Impl() = default;
-    Impl(const std::string& filepath);
+    explicit Impl(const std::string& filepath);
 
     const std::string filepath;
     json contents;

@@ -39,9 +39,8 @@ std::string render::custom_filter::empty_callback(const std::string& var_tok, co
 std::string render::custom_filter::default_value_callback(const std::string& value, const std::string& var_tok,
                                                           const json& j) {
 
-    std::string ret;
     try {
-        ret = render::value_lookup(var_tok, j);
+        std::string ret = render::value_lookup(var_tok, j);
         return (ret.empty()) ? value : ret;  // Return default '' empty string if it is not found.
     } catch (...) {
         return value;

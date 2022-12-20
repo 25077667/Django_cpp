@@ -22,8 +22,6 @@ std::string render::variable(const std::string& ctx, const json& j) {
     boost::match_flag_type flags = boost::match_default;
     auto start = ctx.begin();
     while (boost::regex_search(start, ctx.end(), what, expr, flags)) {
-        const auto& variable_token = what[1].str();
-
         // Append those stuff before variable's placeholder
         result += std::string(start, what[0].first);
 

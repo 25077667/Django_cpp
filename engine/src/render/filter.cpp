@@ -66,7 +66,6 @@ render::filter_callback render::parse_filter(const std::string& filter_raw_str) 
             process_fn = [ctrl_tok = ctrl_tok]([[maybe_unused]] const std::string& var_tok,
                                                [[maybe_unused]] const json& j) -> std::string {
                 throw std::runtime_error(std::string("Unsupported filter: ") + ctrl_tok + "\n");
-                return "";
             };
             break;
     }
